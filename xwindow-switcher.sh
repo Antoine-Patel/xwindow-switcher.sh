@@ -1,8 +1,8 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Antoine Patel (antoine.patel.fr@gmail.com)
 #
-# Licence: http://opensource.org/licenses/MIT (See also at the end of
+# Licence: http://opensource.org/licenses/MIT (See also the end of
 # this file)
 #
 # xwindow-switcher:
@@ -13,50 +13,51 @@
 # [https://wiki.gnome.org/Projects/Zenity].
 #
 # Note that you can type the beginning of the TITLE of the window in
-# the choice list to select it, then type ENTER to switch to it: no
-# mouse needed to control the GUI.
+# the choice list, then type ENTER to switch to it: no mouse needed to
+# control the GUI.
 #
 # For a GUI-less version, use 'wmctrl' directly.
 
 
-# Most windows manager of multiple workspaces aka desktops. We get the
-# id of the current one.
+# Most windows manager have multiple workspaces aka desktops. We get
+# the id of the current one.
 current_desktop_id=$(wmctrl -d | grep '*' | cut -f1 -d' ')
 
-# We retrieve a list of the open windows for the current desktop. It
-# looks like:
+# wmctrl -l produces something like:
 #
+# 0x01800007 -1 antoine-mint1 Desktop
+# 0x01e00080  0 antoine-mint1 Inbox - someone@email.com - ...
 # 0x02400008  1 antoine-mint1 Terminal
 # 0x02400e62  1 antoine-mint1 Terminal
 # 0x034002f8  1 antoine-mint1 Note from 2015-10-06 11:03:29.700
-# 0x022000a3  1 antoine-mint1 emacs@someone
-# 0x0360009a  1 antoine-mint1 *Untitled Document 1 - gedit
-# 0x02e00001  1 antoine-mint1 wmctrl - Chromium
-this_desktop_windows=$(wmctrl -l | grep " "$current_desktop_id" ")
+# 0x022000a3  1 antoine-mint1 emacs@antoine-mint1
 
-# Now we only want the TITLEs of the windows, ie. the last part. We
-# need this to allow users to choose their window by typing the
-# beginning to its TITLE == No mouse needed.
-window_names=$(echo "$this_desktop_windows" | cut -f'5-' -d' ')
-wids=$(echo "$this_desktop_windows" | cut -f1 -d' ')
+# Now we only want the TITLEs and IDs of the windows, ie. the last
+# part and the first column. We reorder by putting the TITLEs first,
+# then the IDs. This to allow users to choose their window by typing
+# the beginning to its TITLE == No mouse needed.
+window_names=$(wmctrl -l | \
+    grep -e "[0-9]x[0-9a-zA-Z]\+[ \t]* $current_desktop_id " | \
+    cut -f'1,5-' -d' ' | \
+    sed 's;\([^ \t]\+\) \(.*\);\2 ([\1]);g')
+# sed: reorder the two columns.
 
-
-# A GUI to choose the window to switch to.
+# Use Zenity to provide a GUI to choose the window to switch to.
 choice=$(echo "$window_names" | \
     zenity --list --title 'Switch to window' --column 'Windows')
 
-# Now we have the TITLE of the choosen window: get its ID (the
-# hexadecimal number looking like 0x02400008).
-choice=$(echo "$choice" | cut -f1 -d'|')
-choice=$(echo "$this_desktop_windows" | grep "$choice" | cut -f1 -d' ')
+# Extract the ID of the choosed window (the hexadecimal number looking
+# like 0x02400008).
+choice=$(echo "$choice" | cut -f1 -d'|' | awk -F'(' '{print $NF}')
+choice="${choice:1:(-2)}"
 
-# Finally switch to the Window. We need to use its ID to target the
-# correct window when multiple ones have the same TITLE in *different*
+# Finally switch to the window. We need to use its ID to target it
+# exactly when multiple ones have the same TITLE in *different*
 # desktops.
 wmctrl -i -a $choice
 
 
-# Note: below I didn't specify the Copyright correctly. I don't care.
+# Note: I didn't specify the copyright correctly below. I don't care.
 #
 # =======================================================================
 #
