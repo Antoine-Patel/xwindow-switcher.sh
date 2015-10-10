@@ -8,9 +8,11 @@
 # xwindow-switcher:
 #
 # A <20 LOC x11 window switcher (ALT+TAB replacement) written in BASH,
-# with a Graphical User Interface (no mouse needed), powered by wmctrl
-# [https://sites.google.com/site/tstyblo/wmctrl/] and Zenity
-# [https://wiki.gnome.org/Projects/Zenity].
+# with a Graphical User Interface (no mouse required, however),
+# powered by wmctrl [https://sites.google.com/site/tstyblo/wmctrl/]
+# and Zenity [https://wiki.gnome.org/Projects/Zenity].
+#
+# Please install wmctrl and Zenity first.
 #
 # Note that you can type the beginning of the TITLE of the window in
 # the choice list, then type ENTER to switch to it: no mouse needed to
