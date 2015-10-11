@@ -9,6 +9,10 @@ License: [MIT](LICENSE)
 
 ![xwindow-switcher screenshot](screenshot.png)
 
+*Note*: I use a dark GTK 3.x theme, as shown by the screenshot. The
+ colors of `xwindow-switcher.sh` will match your GTK theme, just like
+ any other GTK application you have.
+
 To switch to a window using only your keyboard (no mouse), just type
 the first letters of the window's title you want to switch to; you'll
 see it automatically selected. Then hit your `enter` key.
