@@ -19,6 +19,17 @@
 #
 # For a GUI-less version, use 'wmctrl' directly.
 
+# First command options for Zenity are stored as a string.
+options=$@
+if [[ "$options" = "--help" ]]
+then
+    printf "Note: Options passed to $0 are forwared to Zenity. 
+Its help is shown below.\n$(zenity --help-general)\n$(zenity --help-list)\n"
+    exit
+fi
+
+# Using an array to store the options.
+arguments=(${options:="--width=600 --height=400"})
 
 # Most windows manager have multiple workspaces aka desktops. We get
 # the id of the current one.
@@ -44,16 +55,16 @@ window_names=$(wmctrl -l | \
 # sed: reorder the two columns.
 
 # Use Zenity to provide a GUI to choose the window to switch to.
-choice=$(echo "$window_names" | \
-    zenity --list --title 'Switch to window' --column 'Windows')
+choice=$(echo "$window_names" | zenity --list --title 'Switch to window' \
+    --column 'Windows' "${arguments[@]}")
 
 # Extract the ID of the choosed window (the hexadecimal number looking
 # like 0x02400008).
 choice=$(echo "$choice" | cut -f1 -d'|' | awk -F'(' '{print $NF}')
-choice="${choice:1:(-2)}"
 
 # Finally switch to the window. We need to use its ID to target it
 # exactly when multiple ones have the same TITLE in *different*
-# desktops.
-wmctrl -i -a $choice
+# desktops. $choice is something like "[0x022000a3])" at this point, so
+# we trim it a little.
+wmctrl -i -a "${choice:1:(-2)}"
 
