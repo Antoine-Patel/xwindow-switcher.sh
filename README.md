@@ -9,6 +9,10 @@ License: [MIT](LICENSE)
 
 ![xwindow-switcher screenshot](screenshot.png)
 
+To switch to a window only using your keyboard (no mouse), just type
+the first letters of the window's title you want to switch to; you'll
+see it automatically selected. Then hit your `enter` key.
+
 ## Installation
 
 1. Make sure you have
