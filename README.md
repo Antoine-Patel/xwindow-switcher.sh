@@ -44,3 +44,19 @@ Production/Stable
 
 All major features are here. No new features planned. Will work as
 long as wmctrl and Zenity do.
+
+## Why ?
+
+```
+~/bin/xwindow-switcher $ cloc .
+       3 text files.
+       3 unique files.                              
+     153 files ignored.
+
+http://cloc.sourceforge.net v 1.60  T=0.33 s (3.0 files/s, 210.8 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Bourne Shell                     1             10             42             18
+-------------------------------------------------------------------------------
+```
