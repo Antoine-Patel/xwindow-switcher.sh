@@ -42,5 +42,5 @@ Set the width, height and title of `xwindow-switcher.sh`'s GUI.
 
 Production/Stable
 
-All major features here. No new features planned. Will work as long as
-wmctrl and Zenity do.
+All major features are here. No new features planned. Will work as
+long as wmctrl and Zenity do.
