@@ -38,3 +38,9 @@ accepts the same arguments as `zenity --list ...`.
 
 Set the width, height and title of `xwindow-switcher.sh`'s GUI.
 
+## Status
+
+Production/Stable
+
+All major features here. No new features planned. Will work as long as
+wmctrl and Zenity do.
