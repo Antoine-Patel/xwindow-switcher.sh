@@ -14,7 +14,7 @@ License: [MIT](LICENSE)
 1. Make sure you have
 [wmctrl](https://sites.google.com/site/tstyblo/wmctrl/) and
 [Zenity](https://wiki.gnome.org/Projects/Zenity) installed first (Use
-you package manager if not).
+your package manager if not).
 
 2. Run [xwindow-switcher.sh](xwindow-switcher.sh) in a terminal
    (`./xwindow-switcher.sh`).
