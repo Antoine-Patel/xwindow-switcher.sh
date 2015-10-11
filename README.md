@@ -36,7 +36,7 @@ accepts the same arguments as `zenity --list ...`.
 
 ###### `xwindow-switcher.sh --width=800 --height=600 --title="My Custom Title"`
 
-Set the width, height and title of `xwindow-switcher.sh`'s GUI.
+Sets the width, height and title of `xwindow-switcher.sh`'s GUI.
 
 ## Status
 
