@@ -23,14 +23,14 @@ you package manager if not).
 
 ###### `xwindow-switcher.sh`
 
-Can be called without any options (defaults to a 800x600 GUI).
+Can be called without any options (defaults to a 600*400 GUI).
 
 ###### `xwindow-switcher.sh --help`
 
 Shows the relevant parts of the help of Zenity. `xwindow-switcher.sh`
 accepts the same arguments as `zenity --list ...`.
 
-###### `xwindow-switcher.sh --width=1200 --height=600 --title="My Custom Title"`
+###### `xwindow-switcher.sh --width=800 --height=600 --title="My Custom Title"`
 
 Set the width, height and title of `xwindow-switcher.sh`'s GUI.
 
