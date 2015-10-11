@@ -19,7 +19,7 @@
 #
 # For a GUI-less version, use 'wmctrl' directly.
 
-# First command options for Zenity are stored as a string.
+# First, command options for Zenity are stored as a string.
 options=$@
 if [[ "$options" = "--help" ]]
 then
@@ -47,7 +47,7 @@ current_desktop_id=$(wmctrl -d | grep '*' | cut -f1 -d' ')
 # Now we only want the TITLEs and IDs of the windows, ie. the last
 # part and the first column. We reorder by putting the TITLEs first,
 # then the IDs. This to allow users to choose their window by typing
-# the beginning to its TITLE == No mouse needed.
+# the beginning of its TITLE == No mouse needed.
 window_names=$(wmctrl -l | \
     grep -e "[0-9]x[0-9a-zA-Z]\+[ \t]* $current_desktop_id " | \
     cut -f'1,5-' -d' ' | \
