@@ -20,16 +20,24 @@
 # For a GUI-less version, use 'wmctrl' directly.
 
 # First, command options for Zenity are stored as a string.
-options=$@
-if [[ "$options" = "--help" ]]
+opts=$@
+help_p='--help[ \t]\+\|[ \t]\+--help'
+version_p='--version[ \t]\+\|[ \t]\+--version'
+if [[ "$opts" == "--help" ]] || echo "$opts" | grep -q -e "$help_p"
 then
     printf "Note: Options passed to $0 are forwared to Zenity. 
 Its help is shown below.\n$(zenity --help-general)\n$(zenity --help-list)\n"
     exit
+elif [[ "$opts" == "--version" ]] || echo "$opts" | grep -q -e "$version_p"
+then
+    printf "$0 version 1.0.1
+Zenity version $(zenity --version)
+wmctrl version $(wmctrl --version)\n"
+    exit
 fi
 
 # Using an array to store the options.
-arguments=(${options:="--width=600 --height=400"})
+arguments=(${opts:="--width=600 --height=400"})
 
 # Most windows manager have multiple workspaces aka desktops. We get
 # the id of the current one.
