@@ -30,9 +30,8 @@ Its help is shown below.\n$(zenity --help-general)\n$(zenity --help-list)\n"
     exit
 elif [[ "$opts" == "--version" ]] || echo "$opts" | grep -q -e "$version_p"
 then
-    printf "$0 version 1.0.1
-Zenity version $(zenity --version)
-wmctrl version $(wmctrl --version)\n"
+    v='version';
+    printf "$0 1.0.1 (Zenity $(zenity --$v), wmctrl $(wmctrl --$v)).\n"
     exit
 fi
 

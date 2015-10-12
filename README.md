@@ -1,6 +1,7 @@
 # xwindow-switcher.sh
 
-A minimalist (<20 LOC) x11 window switcher (ALT+TAB replacement) in BASH.
+A minimalist (<30 LOC) x11 window switcher in bash (ALT+TAB
+replacement).
 
 Powered by [wmctrl](https://sites.google.com/site/tstyblo/wmctrl/) and
 [Zenity](https://wiki.gnome.org/Projects/Zenity).
@@ -35,12 +36,20 @@ Can be called without any options (defaults to a 600*400 GUI).
 
 ###### `xwindow-switcher.sh --help`
 
-Shows the relevant parts of the help of Zenity. `xwindow-switcher.sh`
-accepts the same arguments as `zenity --list ...`.
+Shows the relevant parts of the help of Zenity, because
+`xwindow-switcher.sh` accepts the same arguments as `zenity --list
+...`.
 
 ###### `xwindow-switcher.sh --width=800 --height=600 --title="My Custom Title"`
 
-Sets the width, height and title of `xwindow-switcher.sh`'s GUI.
+Sets the width, height and title of `xwindow-switcher.sh`'s
+GUI. **Warning !** because of the way options are handled by
+`xwindow-switcher.sh`, options **cannot** be passed like `--width 800
+--height 600` (you need to use `=`).
+
+###### `xwindow-switcher.sh --version`
+
+Shows the version of `xwindow-switcher.sh`, Zenity and wmctrl.
 
 ## Status
 
@@ -55,12 +64,12 @@ long as wmctrl and Zenity do.
 ~/bin/xwindow-switcher $ cloc .
        3 text files.
        3 unique files.
-     153 files ignored.
+     173 files ignored.
 
-http://cloc.sourceforge.net v 1.60  T=0.33 s (3.0 files/s, 210.8 lines/s)
+http://cloc.sourceforge.net v 1.60  T=0.21 s (4.7 files/s, 363.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Bourne Shell                     1             10             42             18
+Bourne Shell                     1             10             42             25
 -------------------------------------------------------------------------------
 ```
