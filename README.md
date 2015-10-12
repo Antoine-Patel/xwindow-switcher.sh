@@ -43,9 +43,7 @@ Shows the relevant parts of the help of Zenity, because
 ###### `xwindow-switcher.sh --width=800 --height=600 --title="My Custom Title"`
 
 Sets the width, height and title of `xwindow-switcher.sh`'s
-GUI. **Warning !** because of the way options are handled by
-`xwindow-switcher.sh`, options **cannot** be passed like `--width 800
---height 600` (you need to use `=`).
+GUI.
 
 ###### `xwindow-switcher.sh --version`
 
