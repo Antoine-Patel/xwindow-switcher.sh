@@ -21,6 +21,7 @@
 
 # First, command options for Zenity are stored as a string.
 opts=$@
+
 help_p='--help[ \t]\+\|[ \t]\+--help'
 version_p='--version[ \t]\+\|[ \t]\+--version'
 if [[ "$opts" == "--help" ]] || echo "$opts" | grep -q -e "$help_p"
