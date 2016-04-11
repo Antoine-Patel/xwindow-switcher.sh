@@ -14,25 +14,26 @@
 # Please install wmctrl and Zenity first.
 #
 # Note that you can type the beginning of the TITLE of the window in
-# the choice list, then type ENTER to switch to it: no mouse is needed 
+# the choice list, then type ENTER to switch to it: no mouse is needed
 # to control the GUI.
 #
 # For a GUI-less version, use 'wmctrl' directly.
 
 # First, command options for Zenity are stored as a string.
-opts=$@
+opts="$*"
 
 help_p='--help[ \t]\+\|[ \t]\+--help'
 version_p='--version[ \t]\+\|[ \t]\+--version'
 if [[ "$opts" == "--help" ]] || echo "$opts" | grep -q -e "$help_p"
 then
-    printf "Note: Options passed to $0 are forwared to Zenity. 
-Its help is shown below.\n$(zenity --help-general)\n$(zenity --help-list)\n"
+    printf "Note: Options passed to $0 are forwared to Zenity.
+Its help is shown below.\n%s%s\n" \
+    "$(zenity --help-general)" "$(zenity --help-list)"
     exit
 elif [[ "$opts" == "--version" ]] || echo "$opts" | grep -q -e "$version_p"
 then
-    v='version';
-    printf "$0 1.0.1 (Zenity $(zenity --$v), wmctrl $(wmctrl --$v)).\n"
+    printf "$0 1.0.1 (Zenity %s, wmctrl %s).\n" \
+        "$(zenity --version)" "$(wmctrl --version)"
     exit
 fi
 
@@ -41,7 +42,7 @@ arguments=(${opts:="--width=600 --height=400"})
 
 # Most windows manager have multiple workspaces aka desktops. We get
 # the id of the current one.
-current_desktop_id=$(wmctrl -d | grep '*' | cut -f1 -d' ')
+current_desktop_id=$(wmctrl -d | grep -e '[*]' | cut -f1 -d' ')
 
 # wmctrl -l produces something like:
 #
@@ -74,5 +75,4 @@ choice=$(echo "$choice" | cut -f1 -d'|' | awk -F'(' '{print $NF}')
 # exactly when multiple ones have the same TITLE in *different*
 # desktops. $choice is something like "[0x022000a3])" at this point, so
 # we trim it a little.
-wmctrl -i -a "${choice:1:(-2)}"
-
+[[ ! -z "$choice" ]] && wmctrl -i -a "${choice:1:(-2)}"
